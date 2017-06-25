@@ -1,0 +1,57 @@
+plugins {
+    id 'java'
+    id 'maven-publish'
+    id 'com.jfrog.bintray' version "1.7.3"
+}
+
+group = 'com.mooregreatsoftware.pixymeta'
+
+repositories {
+    jcenter()
+    maven { name = "Java Advanced Imaging for ImageIO repo"; url = "http://maven.geotoolkit.org" }
+}
+
+sourceSets.main.java.srcDirs = ['src']
+
+dependencies {
+    compile "javax.media:jai_imageio:1.1"
+    compile "org.slf4j:slf4j-api:1.7.12"
+}
+
+wrapper {
+    gradleVersion = '4.0'
+}
+
+version = "0.9.0"
+
+task sourceJar(type: Jar) {
+    from sourceSets.main.allJava
+}
+
+publishing {
+    publications {
+        maven(MavenPublication) {
+            from components.java
+
+            artifact sourceJar {
+                classifier "sources"
+            }
+        }
+    }
+}
+
+bintray {
+    user = bintrayUser  // from ~/.gradle/gradle.properties
+    key = bintrayKey    // from ~/.gradle/gradle.properties
+    publications = ['maven']
+    publish = true
+    pkg {
+        repo = 'java-lib'
+        name = 'pixymeta'
+        licenses = ['EPL-1.0']
+        vcsUrl = 'https://github.com/jdigger/pixymeta.git'
+        publicDownloadNumbers = true
+        githubRepo = 'jdigger/pixymeta'
+        githubReleaseNotesFile = 'README.md'
+    }
+}

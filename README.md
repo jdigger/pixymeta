@@ -1,3 +1,9 @@
+# FORK
+
+This a fork of https://github.com/dragon66/pixymeta to have a versioned artifact with sources.
+
+[ ![Download](https://api.bintray.com/packages/jmoore/java-lib/pixymeta/images/download.svg) ](https://bintray.com/jmoore/java-lib/pixymeta/_latestVersion)
+
 # pixymeta
 Java image metadata CRUD tool - a pure Java image metadata manipulation tool.
 This is the meta data related part branched out from icafe repository.
@@ -29,29 +35,30 @@ Image metadata manipulation:
 
 Where can I get the latest release?
 -----------------------------------
-There is currently no stable release of PIXYMETA. However you can pull the latest SNAPSHOT from Sonatype SNAPSHOT repository by adding the snapshot repository to your pom.xml:
- 
+Add to your pom.xml:
+
 ```xml
-<repository>
-  <id>oss.sonatype.org</id>
-  <name>Sonatype Snapshot Repository</name>
-  <url>https://oss.sonatype.org/content/repositories/snapshots</url>
-  <releases>
-    <enabled>false</enabled>
-  </releases>
-  <snapshots>
-    <enabled>true</enabled>
-  </snapshots>
-</repository> 
+<repositories>
+    <repository>
+      <id>jai-imageio</id>
+      <name>Java Advanced Imaging for ImageIO</name>
+      <url>http://maven.geotoolkit.org</url>
+    </repository> 
+    <repository>
+      <id>jmoore-java</id>
+      <name>JMoore Java Lib Repo</name>
+      <url>http://dl.bintray.com/jmoore/java-lib</url>
+    </repository> 
+</repositories>
 ```
 
-Then you can use the SNAPSHOT version of PIXYMETA in your pom.xml:
+Then you can use the latest version of PIXYMETA in your pom.xml:
 
 ```xml
 <dependency>
-  <groupId>com.github.dragon66</groupId>
+  <groupId>com.mooregreatsoftware.pixymeta</groupId>
   <artifactId>pixymeta</artifactId>
-  <version>1.0-SNAPSHOT</version>
+  <version>{version}</version>
 </dependency>
 ``` 
 
