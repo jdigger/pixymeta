@@ -1,0 +1,49 @@
+buildscript {
+    repositories {
+        jcenter()
+        maven { name = 'Defaults Plugin Repo'; url = 'http://dl.bintray.com/jmoore/java-lib' }
+        maven { name = 'Gradle Plugin Portal'; url = 'https://plugins.gradle.org/m2/' }
+    }
+    dependencies {
+        classpath 'com.mooregreatsoftware:gradle-defaults:4.0.1'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'com.jfrog.bintray' version '1.7.1'
+}
+
+apply plugin: 'com.mooregreatsoftware.bintray'
+apply plugin: 'com.mooregreatsoftware.release'
+
+group = 'com.mooregreatsoftware.pixymeta'
+
+repositories {
+    jcenter()
+    maven { name = "Java Advanced Imaging for ImageIO repo"; url = "http://maven.geotoolkit.org" }
+}
+
+defaults {
+    orgId = 'jdigger'
+    bintrayRepo = 'java-lib'
+    vcsWriteUrl = "git@github.com:jdigger/pixymeta.git"
+}
+
+sourceSets.main.java.srcDirs = ['src']
+
+dependencies {
+    compile "javax.media:jai_imageio:1.1"
+    compile "org.slf4j:slf4j-api:1.7.12"
+}
+
+wrapper {
+    gradleVersion = '4.0'
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+artifacts.archives sourcesJar
